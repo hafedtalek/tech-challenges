@@ -20,5 +20,18 @@ class AppTest extends WebTestCase
 
         $this->assertTrue($response->isOk());
         $this->assertEquals('Status OK', $response->getContent());
+
+        $crawler = $client->request('GET', '/api/v1/Client/Surveys');
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isOk());
+        $this->assertEquals('Paris', $response->getContent()[0]->name);
+
+        $crawler = $client->request('POST',["option", ["product1"]] '/api/v1/Client/Surveys');
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isOk());
+        $this->assertEquals('Paris', $response->getContent()[0]->name);
+        
     }
 }
